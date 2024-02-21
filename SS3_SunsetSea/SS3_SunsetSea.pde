@@ -42,6 +42,9 @@ void draw() {
 
   // Silhouettes
   drawSilhouettes();
+  
+  //used to figure out if mouse was over the tree
+  //print(mouseX, mouseY);
 }
 
 void drawClouds() {
