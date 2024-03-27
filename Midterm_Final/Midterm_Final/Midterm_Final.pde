@@ -1,9 +1,20 @@
+/*
+Name: Steven Taveras
+Title: Final_Midterm
+Instructions: Move your mouse over the screen and click on an art piece to view it.
+*/
+
 String state = "pregame"; // Storing our states as Strings 
 float sunColorR, sunColorG, sunColorB;
 float cloudX = 0; // Initial position of the clouds
 PImage backgroundImg;
 float rainX[], rainY[], rainSpeed[];
 int numRain = 200;
+// Position of the moon
+int moonX; 
+int moonY;
+// Flag to track mouse press
+boolean mousePressedFlag = false;
 
 
 
@@ -24,6 +35,10 @@ void setup() {
     rainY[i] = random(-height, 0); 
     rainSpeed[i] = random(2, 9); // Random falling speed
   }
+  
+  moonX = width / 2;
+  moonY = height / 3;
+  
   textAlign(CENTER);
   textSize(25);
 }
@@ -47,38 +62,7 @@ void draw() {
     sketchFive();
   }
   
-  println(state);
-}
-
-////////////////////////////////////////////////////////////
-
-void mousePressed() {
-  if (state == "pregame") {
-    state = "game";
-  } else if (state == "game over") {
-    state = "pregame";
-  } else if (state == "game") {
-    if (mouseX <= width/2 && mouseY <= height/2) {
-      state = "sketch one";
-    } else if (mouseX >= width/2 && mouseY <= height/2) {
-      state = "sketch two";
-    } else if (mouseY >= height/2 && mouseX <= width/2) {
-      state = "sketch three";
-    } else if (mouseY >= height/2 && mouseX >= width/2) {
-      state = "sketch five";
-    }
-  } else if (state == "sketch one") {
-    state = "game over";
-  }
-  else if (state == "sketch two") {
-    state = "game over";
-  } else if (state == "sketch two") {
-    state = "game over";
-  } else if (state == "sketch three") {
-    state = "game over";
-  } else if (state == "sketch five") {
-    state = "game over";
-  }
+  //println(state);
 }
 
 
@@ -105,6 +89,7 @@ void game() {
     rect(0, 0, width/2, height/2);
     fill(0);
     text("Sketch 1", width/4, height/4);
+    sketchOne();
   } else if(mouseX >= width/2 && mouseY <= height/2 && mouseX <= width && mouseY >=0){
     fill(0,0,255);
     rect(width/2, 0, width/2, height/2);
@@ -162,13 +147,39 @@ void sketchOne(){
    rect(850, 550, 150, 340);
 }
 
-void drawSketchOne(){
-}
-
-
 ////////////////////////////////////////////////////////////
 
 void sketchTwo(){
+  background(0, 10, 50); // Dark blue night sky
+  
+  // Draw moonlight
+  if (mousePressedFlag) {
+    fill(146,161,207, 150); // Brightened moonlight
+    ellipse(moonX, moonY, 200, 200);
+  }
+  
+  // Draw moon
+  fill(255);
+  ellipse(moonX, moonY, 100, 100);
+  
+  // Draw stars
+  for (int i = 0; i < 100; i++) {
+    float x = random(width);
+    float y = random(height);
+    stroke(255);
+    //draws a point at x and ys location. location is random
+    point(x, y);
+  }
+  
+  // Draw buildings
+  fill(100); // Gray buildings
+
+  //buildings
+  rect(100,height-150, 80,150);
+  rect(250,height-200, 100,200);
+  rect(400,height - 250, 120,250);
+  rect(550,height - 180, 90,180);
+  rect(700,height - 220, 110,220);
 }
 ////////////////////////////////////////////////////////////
 
@@ -225,18 +236,9 @@ void sketchFive(){
 }
 
 ////////////////////////////////////////////////////////////
-// Sketch 1 Functions
-////////////////////////////////////////////////////////////
-
-
-////////////////////////////////////////////////////////////
-// Sketch 2 Functions
-////////////////////////////////////////////////////////////
-
-
-////////////////////////////////////////////////////////////
 // Functions for sketch 3
 ////////////////////////////////////////////////////////////
+
 void drawClouds() {
   fill(255);
   // this moves the clouds forward
@@ -291,11 +293,6 @@ void drawHighlightedTree(int x, int y) {
 boolean isMouseOverTree(int x, int y) {
   return mouseX > x - 20 && mouseX < x + 20 && mouseY > y - 100 && mouseY < y;
 }
-
-////////////////////////////////////////////////////////////
-// Sketch 4r Functions
-////////////////////////////////////////////////////////////
-
 
 ////////////////////////////////////////////////////////////
 // Sketch 5 Functions
@@ -355,5 +352,48 @@ void mouseMoved() {
     {
       mouseX = width - 50;
     }
+  }
+  else if (state == "state two") {
+    // Move the moon based on mouse position
+    moonX = mouseX;
+    moonY = mouseY;
+  }
+}
+
+////////////////////////////////////////////////////////////
+// Shared Functions
+////////////////////////////////////////////////////////////
+
+
+void mousePressed() {
+  if (state == "pregame") {
+    state = "game";
+  } else if (state == "game over") {
+    state = "pregame";
+  } else if (state == "game") {
+    if (mouseX <= width/2 && mouseY <= height/2) {
+      state = "sketch one";
+    } else if (mouseX >= width/2 && mouseY <= height/2) {
+      state = "sketch two";
+    } else if (mouseY >= height/2 && mouseX <= width/2) {
+      state = "sketch three";
+    } else if (mouseY >= height/2 && mouseX >= width/2) {
+      state = "sketch five";
+    }
+  } else if (state == "sketch one") {
+    state = "game over";
+  }
+  else if (state == "sketch two") {
+    state = "game over";
+    // Toggle mousePressedFlag to the opposite of what it currently is
+    mousePressedFlag = !mousePressedFlag;
+    
+  } else if (state == "sketch two") {
+    // Toggle mousePressedFlag to the opposite of what it currently is
+    state = "game over";
+  } else if (state == "sketch three") {
+    state = "game over";
+  } else if (state == "sketch five") {
+    state = "game over";
   }
 }
