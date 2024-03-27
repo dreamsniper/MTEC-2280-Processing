@@ -43,7 +43,7 @@ void draw() {
     sketchTwo();
   } else if (state == "sketch three") {
     sketchThree();
-  } else if (state == "sketch four") {
+  } else if (state == "sketch five") {
     sketchFive();
   }
   
@@ -65,7 +65,7 @@ void mousePressed() {
     } else if (mouseY >= height/2 && mouseX <= width/2) {
       state = "sketch three";
     } else if (mouseY >= height/2 && mouseX >= width/2) {
-      state = "sketch four";
+      state = "sketch five";
     }
   } else if (state == "sketch one") {
     state = "game over";
@@ -76,7 +76,7 @@ void mousePressed() {
     state = "game over";
   } else if (state == "sketch three") {
     state = "game over";
-  } else if (state == "sketch four") {
+  } else if (state == "sketch five") {
     state = "game over";
   }
 }
@@ -87,8 +87,8 @@ void mousePressed() {
 void pregame() {
   background(255);
   fill(0);
-  text("Welcome to my Processing Game", width/2, height/2);
-  text("click to play the game", width/2, height/1.5);
+  text("Welcome to my Processing Gallery", width/2, height/2);
+  text("click to view pieces", width/2, height/1.5);
 }
 
 ////////////////////////////////////////////////////////////
@@ -121,7 +121,7 @@ void game() {
     fill(127, 0, 127);
     rect(width/2, height/2, width/2, height/2);
     fill(0);
-    text("Sketch 4", width/1.5, height/1.5);
+    text("Sketch 5", width/1.5, height/1.5);
     sketchFive();
   }
   
@@ -225,6 +225,16 @@ void sketchFive(){
 }
 
 ////////////////////////////////////////////////////////////
+// Sketch 1 Functions
+////////////////////////////////////////////////////////////
+
+
+////////////////////////////////////////////////////////////
+// Sketch 2 Functions
+////////////////////////////////////////////////////////////
+
+
+////////////////////////////////////////////////////////////
 // Functions for sketch 3
 ////////////////////////////////////////////////////////////
 void drawClouds() {
@@ -283,6 +293,11 @@ boolean isMouseOverTree(int x, int y) {
 }
 
 ////////////////////////////////////////////////////////////
+// Sketch 4r Functions
+////////////////////////////////////////////////////////////
+
+
+////////////////////////////////////////////////////////////
 // Sketch 5 Functions
 ////////////////////////////////////////////////////////////
 
@@ -326,15 +341,19 @@ void drawSnowman(float x, float y)
 }
 
 void mouseMoved() {
-  sunColorR = mouseX / 2;
-  sunColorB = 255 - mouseY / 2;
-  
-  // Prevent snowman from going off-screen horizontally
-  if (mouseX < 50) 
-  {
-    mouseX = 50;
-  } else if (mouseX > width - 50) 
-  {
-    mouseX = width - 50;
+  if(state == "sketch three") {
+     sunColorR = mouseX / 2;
+    sunColorB = 255 - mouseY / 2;
+  } 
+  else if (state == "state five") {
+    // Prevent snowman from going off-screen horizontally
+    if (mouseX < 50) 
+    {
+      mouseX = 50;
+    } 
+    else if (mouseX > width - 50) 
+    {
+      mouseX = width - 50;
+    }
   }
 }
