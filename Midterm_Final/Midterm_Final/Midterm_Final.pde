@@ -24,6 +24,7 @@ void setup() {
   sunColorG = 150;
   sunColorB = 255;
   backgroundImg = loadImage("cats3.jpg"); 
+  backgroundImg.resize(800, 800); // Resize background image
   
   rainX = new float[numRain]; 
   rainY = new float[numRain]; 
@@ -89,25 +90,25 @@ void game() {
     rect(0, 0, width/2, height/2);
     fill(0);
     text("Sketch 1", width/4, height/4);
-    sketchOne();
+    //sketchOne();
   } else if(mouseX >= width/2 && mouseY <= height/2 && mouseX <= width && mouseY >=0){
     fill(0,0,255);
     rect(width/2, 0, width/2, height/2);
     fill(0);
     text("Sketch 2", width/1.5, height/4);
-    sketchTwo();
+    //sketchTwo();
   } else if(mouseY >= height/2 && mouseX <= width/2 && mouseY <= height && mouseX <= height) {
     fill(0,255,0);
     rect(0, height/2, width/2, height/2);
     fill(0);
     text("Sketch 3", width/4, height/1.5);
-    sketchThree();
+    //sketchThree();
   } else if(mouseY >= height/2 && mouseX >= height/2 && mouseX <= width && mouseY <= height) {
     fill(127, 0, 127);
     rect(width/2, height/2, width/2, height/2);
     fill(0);
     text("Sketch 5", width/1.5, height/1.5);
-    sketchFive();
+    //sketchFive();
   }
   
 }
@@ -215,8 +216,8 @@ void sketchThree(){
 ////////////////////////////////////////////////////////////
 
 void sketchFive(){
-   background(0); // Clear background
-  backgroundImg.resize(800, 600); // Resize background image
+  background(0); // Clear background
+  //backgroundImg.resize(800, 800); // Resize background image
   image(backgroundImg, 0, 0); 
   
   drawRain();
@@ -226,11 +227,11 @@ void sketchFive(){
     fill(255);
   if (mouseY < height / 2) 
   {
-    text("I'm going to melt...", 20, 40);
+    text("I'm going to melt...", 50, 40);
     mouseY = height / 4;
   } else 
   {
-    text("Stay dry and enjoy the view!", 20, 40);
+    text("Stay dry and enjoy the view!", 50, 40);
     mouseY = height / 2;
   }
 }
