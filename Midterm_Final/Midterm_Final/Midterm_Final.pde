@@ -16,8 +16,6 @@ int moonY;
 // Flag to track mouse press
 boolean mousePressedFlag = false;
 
-
-
 void setup() {
   size (800, 800);
   sunColorR = 255;
@@ -62,8 +60,6 @@ void draw() {
   } else if (state == "sketch five") {
     sketchFive();
   }
-  
-  //println(state);
 }
 
 
