@@ -30,22 +30,28 @@ void draw() {
     background(200);
     text("Follow the pattern!", width / 2, height / 4);
     
-    // Check which button was pressed and draw the corresponding colored circle
-    switch(buttonPressed) {
-      case 0:
-        fill(255, 0, 0); // Red
-        break;
-      case 1:
-        fill(0, 255, 0); // Green
-        break;
-      case 2:
-        fill(0, 0, 255); // Blue
-        break;
-      case 3:
-        fill(255, 255, 0); // Yellow
-        break;
-      default:
-        fill(100); // Default color (grey)
+    // Call the drawPattern function to display the pattern before the player's turn
+    if (currentStep < patternLength) {
+      drawPattern();
+      currentStep++; // Move to the next step in the pattern
+    } else {
+       // Check which button was pressed and draw the corresponding colored circle
+      switch(buttonPressed) {
+        case 0:
+          fill(255, 0, 0); // Red
+          break;
+        case 1:
+          fill(0, 255, 0); // Green
+          break;
+        case 2:
+          fill(0, 0, 255); // Blue
+          break;
+        case 3:
+          fill(255, 255, 0); // Yellow
+          break;
+        default:
+          fill(100); // Default color (grey)
+      }
     }
     
     // Draw the circle at the center of the window
@@ -80,6 +86,7 @@ void serialEvent(Serial myPort) {
     }
   } else {
     startGame(); // Restart the game on any button press
+    currentStep = 0;
   }
 }
 
@@ -91,6 +98,7 @@ void startGame() {
   generatePattern(); // Generate initial pattern
   playerInput = new int[patternLength]; // Reset player input array
   inputIndex = 0; // Reset input index
+  currentStep = 0; // Reset the current step
 }
 
 /////////////////////////////////////////////////////////////////
@@ -99,9 +107,11 @@ void generatePattern() {
   pattern = new int[patternLength];
   
   for (int i = 0; i < patternLength; i++) {
-    pattern[i] = int(random(4)); // Randomize pattern between 0 and 2
+    pattern[i] = int(random(4)); // Randomize pattern between 0 and 3
     print(pattern[i] + " | ");
   }
+  
+  currentStep = 0; // Reset the current step for the new pattern
 }
 
 /////////////////////////////////////////////////////////////////////
